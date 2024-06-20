@@ -1,0 +1,10 @@
+.show-task-section {
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+}

@@ -1,0 +1,9 @@
+.counter-tasks {
+  font-size: 1.4rem;
+  margin: 0;
+  padding: 0;
+}
+
+.count {
+  color: var(--sec-orange);
+}
