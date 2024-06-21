@@ -1,21 +1,24 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useReducer, useState } from 'react'
 
-import { FILTERS, IMPORTANCE } from '../constants'
+import { tasksReducer } from './reducer/taskReducer'
+
 import { getTasks } from './services/getTasks'
-import { Tasks as TasksType } from '../types'
+
 import { Tasks } from './components/Tasks/Tasks'
 import { AddTask } from './components/AddTask/AddTask'
 import { FilterTask } from './components/FilterTask/FilterTask'
 import { CounterTasks } from './components/CounterTasks/CounterTasks'
 
 import './App.css'
+import { filterTasks, filterTasksImportance } from './utils/filterTasks'
 
 const App: React.FC = () => {
-  const [tasks, setTasks] = useState(() => getTasks())
   const [filters, setFilters] = useState({
     status: 'All',
     importance: ''
   })
+
+  const [tasks, dispatch] = useReducer(tasksReducer, undefined, getTasks)
 
   const addTask = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault()
@@ -31,7 +34,7 @@ const App: React.FC = () => {
       importance
     }
 
-    setTasks([newTask, ...tasks])
+    dispatch({ type: 'addTask', payload: newTask })
     form.reset()
   }
 
@@ -41,7 +44,7 @@ const App: React.FC = () => {
       return task
     })
 
-    setTasks(newTasks)
+    dispatch({ type: 'toggleCompleted', payload: newTasks })
   }
 
   const changeTask = (id: string, event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -49,16 +52,20 @@ const App: React.FC = () => {
       if (task.id === id) return { ...task, title: event.target.value }
       return task
     })
-    setTasks(newTasks)
+
+    dispatch({ type: 'changeTask', payload: newTasks })
   }
 
-  const removeTask = (id: string): void => setTasks(tasks.filter(task => task.id !== id))
+  const removeTask = (id: string): void => {
+    const newTasks = tasks.filter(task => task.id !== id)
+    dispatch({ type: 'removeTask', payload: newTasks })
+  }
 
   const handleStatusFilter = (event: React.MouseEvent<HTMLButtonElement>): void => {
     const status = event.currentTarget.textContent ?? filters.status
     const newFilter = { ...filters, status }
     setFilters(newFilter)
-    filterTasks(newFilter)
+    filterTasks(newFilter, tasks)
   }
 
   const handleImportanceFilter = (event: React.MouseEvent<HTMLButtonElement>): void => {
@@ -67,20 +74,7 @@ const App: React.FC = () => {
     else setFilters({ ...filters, importance: newImportance })
   }
 
-  const filterTasks = ({ status }: { status: string, importance: string }): TasksType => {
-    if (status === FILTERS.PENDING) return tasks.filter(task => !task.completed)
-    if (status === FILTERS.COMPLETED) return tasks.filter(task => task.completed)
-    return tasks
-  }
-
-  const filterTasksImportance = ({ importance }: { status: string, importance: string }, previousFiltered: TasksType): TasksType => {
-    if (importance === IMPORTANCE.HIGH) return previousFiltered.filter(task => task.importance === importance)
-    if (importance === IMPORTANCE.MEDIUM) return previousFiltered.filter(task => task.importance === importance)
-    if (importance === IMPORTANCE.LOW) return previousFiltered.filter(task => task.importance === importance)
-    return previousFiltered
-  }
-
-  const filteredTasks = filterTasksImportance(filters, filterTasks(filters))
+  const filteredTasks = filterTasksImportance(filters, filterTasks(filters, tasks))
 
   useEffect(() => {
     window.localStorage.setItem('tasks', JSON.stringify(tasks))

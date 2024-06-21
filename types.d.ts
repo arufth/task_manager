@@ -6,3 +6,24 @@ export interface Task {
 }
 
 export type Tasks = Task[]
+
+export interface AddTaskAction {
+  type: 'addTask'
+  payload: TaskType
+}
+
+export interface ToggleCompleted {
+  type: 'toggleCompleted'
+  payload: TasksType
+}
+export interface ChangeTask {
+  type: 'changeTask'
+  payload: TasksType
+}
+
+export interface RemoveTaskAction {
+  type: 'removeTask'
+  payload: TasksType
+}
+
+export type TasksActions = AddTaskAction | RemoveTaskAction | ToggleCompleted | ChangeTask
