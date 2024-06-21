@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useState } from 'react'
+import React, { useContext, useEffect, useReducer } from 'react'
 
 import { tasksReducer } from './reducer/taskReducer'
 
@@ -9,14 +9,14 @@ import { AddTask } from './components/AddTask/AddTask'
 import { FilterTask } from './components/FilterTask/FilterTask'
 import { CounterTasks } from './components/CounterTasks/CounterTasks'
 
-import './App.css'
 import { filterTasks, filterTasksImportance } from './utils/filterTasks'
 
+import { TasksContext } from './context/TasksContext'
+
+import './App.css'
+
 const App: React.FC = () => {
-  const [filters, setFilters] = useState({
-    status: 'All',
-    importance: ''
-  })
+  const { filters, setFilters } = useContext(TasksContext)
 
   const [tasks, dispatch] = useReducer(tasksReducer, undefined, getTasks)
 

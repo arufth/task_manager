@@ -27,3 +27,14 @@ export interface RemoveTaskAction {
 }
 
 export type TasksActions = AddTaskAction | RemoveTaskAction | ToggleCompleted | ChangeTask
+
+export interface TaskContextType {
+  filters: {
+    status: string
+    importance: string }
+
+  setFilters: React.Dispatch<React.SetStateAction<{
+    status: string
+    importance: string
+  }>>
+}
