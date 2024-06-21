@@ -33,8 +33,11 @@ export interface TaskContextType {
     status: string
     importance: string }
 
-  setFilters: React.Dispatch<React.SetStateAction<{
-    status: string
-    importance: string
-  }>>
+  filteredTasks: Tasks
+  addTask: (event: React.FormEvent<HTMLFormElement>) => void
+  toggleCompleted: (id: string) => void
+  changeTask: (id: string, event: React.ChangeEvent<HTMLInputElement>) => void
+  removeTask: (id: string) => void
+  handleStatusFilter: (event: React.MouseEvent<HTMLButtonElement>) => void
+  handleImportanceFilter: (event: React.MouseEvent<HTMLButtonElement>) => void
 }

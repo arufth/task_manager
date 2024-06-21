@@ -1,10 +1,12 @@
+import { useContext } from 'react'
+
+import { TasksContext } from '../../context/TasksContext'
+
 import './AddTask.css'
 
-interface Props {
-  addTask: (event: React.FormEvent<HTMLFormElement>) => void
-}
+export const AddTask: React.FC = () => {
+  const { addTask } = useContext(TasksContext)
 
-export const AddTask: React.FC<Props> = ({ addTask }) => {
   return (
     <section className='add-task-section'>
       <form onSubmit={addTask}>

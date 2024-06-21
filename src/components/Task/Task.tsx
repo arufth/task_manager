@@ -1,13 +1,22 @@
+import { useContext } from 'react'
+
 import { Task as TaskType } from '../../../types'
+
+import { TasksContext } from '../../context/TasksContext'
+
 import './Task.css'
 
 interface Props {
   task: TaskType
-  toggleCompleted: (id: string) => void
-  changeTask: (id: string, event: React.ChangeEvent<HTMLInputElement>) => void
-  removeTask: (id: string) => void
 }
-export const Task: React.FC<Props> = ({ task, toggleCompleted, changeTask, removeTask }) => {
+
+export const Task: React.FC<Props> = ({ task }) => {
+  const {
+    toggleCompleted,
+    changeTask,
+    removeTask
+  } = useContext(TasksContext)
+
   return (
     <li
       key={task.id}

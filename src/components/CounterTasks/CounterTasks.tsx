@@ -1,11 +1,12 @@
-import { Tasks } from '../../../types'
+import { useContext } from 'react'
+
+import { TasksContext } from '../../context/TasksContext'
+
 import './CounterTasks.css'
 
-interface Props {
-  filteredTasks: Tasks
-}
+export const CounterTasks: React.FC = () => {
+  const { filteredTasks } = useContext(TasksContext)
 
-export const CounterTasks: React.FC<Props> = ({ filteredTasks }) => {
   return (
     <section>
       {

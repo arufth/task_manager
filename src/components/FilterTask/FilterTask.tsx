@@ -1,13 +1,18 @@
+import { useContext } from 'react'
+
 import { FILTERS, IMPORTANCE } from '../../../constants'
+
+import { TasksContext } from '../../context/TasksContext'
+
 import './FilterTask.css'
 
-interface Props {
-  handleStatusFilter: (event: React.MouseEvent<HTMLButtonElement>) => void
-  handleImportanceFilter: (event: React.MouseEvent<HTMLButtonElement>) => void
-  filters: { status: string, importance: string }
-}
+export const FilterTask: React.FC = () => {
+  const {
+    filters,
+    handleImportanceFilter,
+    handleStatusFilter
+  } = useContext(TasksContext)
 
-export const FilterTask: React.FC<Props> = ({ handleStatusFilter, handleImportanceFilter, filters }) => {
   return (
     <section className='filter-task-section'>
       <ul>
