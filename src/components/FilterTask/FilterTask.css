@@ -2,34 +2,35 @@
   display: flex;
   flex-direction: column;
   gap: .5rem;
-  ul {
-    display: flex;
-    justify-content: center;
-    gap: 1.5rem;
-    list-style: none;
-    margin: 0;
-    padding: 0;
+}
 
-    li {
-      font-weight: bold;
-      padding: 5px 10px;
+.status-filter, .importance-filter {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  li {
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 5px;
+
+    button {
+      width: 100%;
+      height: 2.5rem;
       border-radius: 5px;
+      padding-inline: 1rem;
+      font-size: 1.3rem;
+      background: #21354788;
+      color: var(--black);
+      transition: background-color 250ms;
+    }
 
-      button {
-        width: 100%;
-        height: 2.5rem;
-        border-radius: 5px;
-        padding-inline: 1rem;
-        font-size: 1.3rem;
-        background: #21354788;
-        color: var(--black);
-        transition: background-color 250ms;
-      }
-
-      .active {
-        color: var(--white);
-        background-color: var(--thr-blue);
-      }
+    .active {
+      color: var(--white);
+      background-color: var(--thr-blue);
     }
   }
 }
