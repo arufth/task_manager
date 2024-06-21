@@ -1,5 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
-import './App.css'
+import React, { useEffect, useState } from 'react'
 
 import { FILTERS, IMPORTANCE } from '../constants'
 import { getTasks } from './services/getTasks'
@@ -9,20 +8,18 @@ import { AddTask } from './components/AddTask/AddTask'
 import { FilterTask } from './components/FilterTask/FilterTask'
 import { CounterTasks } from './components/CounterTasks/CounterTasks'
 
+import './App.css'
+
 const App: React.FC = () => {
   const [tasks, setTasks] = useState(() => getTasks())
-  const inputTitle = useRef<HTMLInputElement>(null)
-  const inputImportance = useRef<HTMLSelectElement>(null)
-  const [filter, setFilter] = useState('All')
-  const [level, setLevel] = useState('')
-
-  useEffect(() => {
-    window.localStorage.setItem('tasks', JSON.stringify(tasks))
-  }, [tasks])
+  const [filters, setFilters] = useState({
+    status: 'All',
+    importance: ''
+  })
 
   const addTask = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault()
-
+    const form = event.currentTarget
     const formData = new FormData(event.target as HTMLFormElement)
     const title = formData.get('title') as string
     const importance = formData.get('importance') as string
@@ -35,9 +32,7 @@ const App: React.FC = () => {
     }
 
     setTasks([newTask, ...tasks])
-
-    if (inputTitle.current !== null) inputTitle.current.value = ''
-    if (inputImportance.current !== null) inputImportance.current.value = ''
+    form.reset()
   }
 
   const toggleCompleted = (id: string): void => {
@@ -57,43 +52,45 @@ const App: React.FC = () => {
     setTasks(newTasks)
   }
 
-  const removeTask = (id: string): void => {
-    const newTask = tasks.filter(task => task.id !== id)
-    setTasks(newTask)
-  }
+  const removeTask = (id: string): void => setTasks(tasks.filter(task => task.id !== id))
 
-  const hanldeFilterTasks = (event: React.MouseEvent<HTMLButtonElement>): void => {
-    const newFilter = event.currentTarget.textContent ?? filter
-    setFilter(newFilter)
+  const handleStatusFilter = (event: React.MouseEvent<HTMLButtonElement>): void => {
+    const status = event.currentTarget.textContent ?? filters.status
+    const newFilter = { ...filters, status }
+    setFilters(newFilter)
     filterTasks(newFilter)
   }
 
-  const handleLevelFilter = (event: React.MouseEvent<HTMLButtonElement>): void => {
-    const newLevel = event.currentTarget.textContent ?? level
-    if (newLevel === level) setLevel('')
-    else setLevel(newLevel)
+  const handleImportanceFilter = (event: React.MouseEvent<HTMLButtonElement>): void => {
+    const newImportance = event.currentTarget.textContent ?? filters.importance
+    if (newImportance === filters.importance) setFilters({ ...filters, importance: '' })
+    else setFilters({ ...filters, importance: newImportance })
   }
 
-  const filterTasks = (filter: string): TasksType => {
-    if (filter === FILTERS.PENDING) return tasks.filter(task => !task.completed)
-    if (filter === FILTERS.COMPLETED) return tasks.filter(task => task.completed)
+  const filterTasks = ({ status }: { status: string, importance: string }): TasksType => {
+    if (status === FILTERS.PENDING) return tasks.filter(task => !task.completed)
+    if (status === FILTERS.COMPLETED) return tasks.filter(task => task.completed)
     return tasks
   }
 
-  const filterTasksLevel = (level: string, previousFiltered: TasksType): TasksType => {
-    if (level === IMPORTANCE.HIGH) return previousFiltered.filter(task => task.importance === level)
-    if (level === IMPORTANCE.MEDIUM) return previousFiltered.filter(task => task.importance === level)
-    if (level === IMPORTANCE.LOW) return previousFiltered.filter(task => task.importance === level)
+  const filterTasksImportance = ({ importance }: { status: string, importance: string }, previousFiltered: TasksType): TasksType => {
+    if (importance === IMPORTANCE.HIGH) return previousFiltered.filter(task => task.importance === importance)
+    if (importance === IMPORTANCE.MEDIUM) return previousFiltered.filter(task => task.importance === importance)
+    if (importance === IMPORTANCE.LOW) return previousFiltered.filter(task => task.importance === importance)
     return previousFiltered
   }
 
-  const filteredTasks = filterTasksLevel(level, filterTasks(filter))
+  const filteredTasks = filterTasksImportance(filters, filterTasks(filters))
+
+  useEffect(() => {
+    window.localStorage.setItem('tasks', JSON.stringify(tasks))
+  }, [tasks])
 
   return (
     <>
       <h1>TASK MANAGER</h1>
 
-      <AddTask addTask={addTask} inputTitle={inputTitle} />
+      <AddTask addTask={addTask} />
 
       <Tasks
         filteredTasks={filteredTasks}
@@ -105,10 +102,9 @@ const App: React.FC = () => {
       <CounterTasks filteredTasks={filteredTasks} />
 
       <FilterTask
-        level={level}
-        handleLevelFilter={handleLevelFilter}
-        hanldeFilterTasks={hanldeFilterTasks}
-        filter={filter}
+        filters={filters}
+        handleImportanceFilter={handleImportanceFilter}
+        handleStatusFilter={handleStatusFilter}
       />
     </>
   )

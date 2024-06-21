@@ -6,9 +6,9 @@ Task Manager is a modern web application designed to help users manage their dai
 
 <!-- ## Live Demo
 
-Experience Task Manager in action. Check out the live demo [here](https://your-live-demo-link.com). -->
+Experience Task Manager in action. Check out the live demo [here](https://dummy-task-manager.netlify.app/).
 
-This demo gives you a hands-on look at how Task Manager can streamline your task management process. Explore the features, add tasks, and see how it can fit into your daily routine.
+This demo gives you a hands-on look at how Task Manager can streamline your task management process. Explore the features, add tasks, and see how it can fit into your daily routine. -->
 
 ## Features
 

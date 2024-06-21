@@ -2,47 +2,46 @@ import { FILTERS, IMPORTANCE } from '../../../constants'
 import './FilterTask.css'
 
 interface Props {
-  hanldeFilterTasks: (event: React.MouseEvent<HTMLButtonElement>) => void
-  handleLevelFilter: (event: React.MouseEvent<HTMLButtonElement>) => void
-  filter: string
-  level: string
+  handleStatusFilter: (event: React.MouseEvent<HTMLButtonElement>) => void
+  handleImportanceFilter: (event: React.MouseEvent<HTMLButtonElement>) => void
+  filters: { status: string, importance: string }
 }
 
-export const FilterTask: React.FC<Props> = ({ hanldeFilterTasks, filter, handleLevelFilter, level }) => {
+export const FilterTask: React.FC<Props> = ({ handleStatusFilter, handleImportanceFilter, filters }) => {
   return (
     <section className='filter-task-section'>
       <ul>
         <li>
           <button
-            className={filter === FILTERS.ALL ? 'active' : ''}
-            onClick={hanldeFilterTasks}
+            className={filters.status === FILTERS.ALL ? 'active' : ''}
+            onClick={handleStatusFilter}
           >{FILTERS.ALL}
           </button>
         </li>
         <li>
           <button
-            className={filter === FILTERS.PENDING ? 'active' : ''}
-            onClick={hanldeFilterTasks}
+            className={filters.status === FILTERS.PENDING ? 'active' : ''}
+            onClick={handleStatusFilter}
           >{FILTERS.PENDING}
           </button>
         </li>
         <li>
           <button
-            className={filter === FILTERS.COMPLETED ? 'active' : ''}
-            onClick={hanldeFilterTasks}
+            className={filters.status === FILTERS.COMPLETED ? 'active' : ''}
+            onClick={handleStatusFilter}
           >{FILTERS.COMPLETED}
           </button>
         </li>
       </ul>
       <ul>
         <li>
-          <button className={level === IMPORTANCE.HIGH ? 'active' : ''} onClick={handleLevelFilter}>High</button>
+          <button className={filters.importance === IMPORTANCE.HIGH ? 'active' : ''} onClick={handleImportanceFilter}>{IMPORTANCE.HIGH}</button>
         </li>
         <li>
-          <button className={level === IMPORTANCE.MEDIUM ? 'active' : ''} onClick={handleLevelFilter}>Medium</button>
+          <button className={filters.importance === IMPORTANCE.MEDIUM ? 'active' : ''} onClick={handleImportanceFilter}>{IMPORTANCE.MEDIUM}</button>
         </li>
         <li>
-          <button className={level === IMPORTANCE.LOW ? 'active' : ''} onClick={handleLevelFilter}>Low</button>
+          <button className={filters.importance === IMPORTANCE.LOW ? 'active' : ''} onClick={handleImportanceFilter}>{IMPORTANCE.LOW}</button>
         </li>
       </ul>
     </section>
