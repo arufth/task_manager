@@ -27,9 +27,11 @@ export const TasksContextProvider: React.FC<Props> = ({ children }) => {
 
     const newTask = {
       title,
+      description: '',
       id: window.crypto.randomUUID(),
       completed: false,
-      importance
+      importance,
+      isExpanded: false
     }
 
     dispatch({ type: 'addTask', payload: newTask })
@@ -59,6 +61,32 @@ export const TasksContextProvider: React.FC<Props> = ({ children }) => {
     dispatch({ type: 'removeTask', payload: newTasks })
   }
 
+  const updateDescription = (id: string, event: React.ChangeEvent<HTMLTextAreaElement>): void => {
+    const newTasks = tasks.map(task => {
+      if (task.id === id) return { ...task, description: event.target.value }
+      return task
+    })
+    dispatch({ type: 'updateDescription', payload: newTasks })
+  }
+
+  const expandTask = (id: string): void => {
+    const newTasks = tasks.map(task => {
+      if (task.id === id) return { ...task, isExpanded: !task.isExpanded }
+      return task
+    })
+
+    dispatch({ type: 'expandTask', payload: newTasks })
+  }
+
+  const changeImportance = (id: string, event: React.ChangeEvent<HTMLSelectElement>): void => {
+    const newTasks = tasks.map(task => {
+      if (task.id === id) return { ...task, importance: event.target.value }
+      return task
+    })
+
+    dispatch({ type: 'changeImportance', payload: newTasks })
+  }
+
   const handleStatusFilter = (event: React.MouseEvent<HTMLButtonElement>): void => {
     const status = event.currentTarget.textContent ?? filters.status
     const newFilter = { ...filters, status }
@@ -79,7 +107,7 @@ export const TasksContextProvider: React.FC<Props> = ({ children }) => {
   }, [tasks])
 
   return (
-    <TasksContext.Provider value={{ filters, filteredTasks, addTask, toggleCompleted, changeTask, removeTask, handleStatusFilter, handleImportanceFilter }}>
+    <TasksContext.Provider value={{ filters, filteredTasks, addTask, toggleCompleted, changeTask, removeTask, updateDescription, expandTask, handleStatusFilter, handleImportanceFilter, changeImportance }}>
       {children}
     </TasksContext.Provider>
   )

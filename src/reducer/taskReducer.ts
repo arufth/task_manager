@@ -12,6 +12,12 @@ export const tasksReducer = (state: TasksType, action: TasksActions): TasksType 
       return payload
     case 'removeTask':
       return payload
+    case 'expandTask':
+      return payload
+    case 'changeImportance':
+      return payload
+    case 'updateDescription':
+      return payload
     default:
       return state
   }

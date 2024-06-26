@@ -4,20 +4,16 @@ Task Manager is a modern web application designed to help users manage their dai
 
 ![Task Manager Preview](public/task-manager.jpeg)
 
-<!-- ## Live Demo
-
-Experience Task Manager in action. Check out the live demo [here](https://dummy-task-manager.netlify.app/).
-
-This demo gives you a hands-on look at how Task Manager can streamline your task management process. Explore the features, add tasks, and see how it can fit into your daily routine. -->
-
 ## Features
 
-- **Add Tasks**: Easily add new tasks with a simple and intuitive interface.
-- **Filter Tasks**: Filter tasks based on their status (completed, pending, etc.) to focus on what's important.
-- **Task Counter**: Keep track of how many tasks you have completed and how many are still pending.
+- **Add Tasks**: Easily add new tasks with a simple and intuitive interface. Users can specify the task title and its importance.
+- **Filter Tasks**: Filter tasks based on their status (completed, pending, etc.) or importance to focus on what's important.
+- **Task Counter**: Keep track of how many tasks you have completed and how many are still pending. A visual counter is provided for better tracking.
+- **Expandable Task View**: Tasks can be expanded to view detailed information, allowing users to manage them more effectively.
 
 ## Built With
 
 - [React](https://reactjs.org/) - The web framework used
 - [Vite](https://vitejs.dev/) - Frontend Tooling
 - [TypeScript](https://www.typescriptlang.org/) - Used for static type checking
+- [ESLint](https://eslint.org/) - For code analysis and to enforce coding standards

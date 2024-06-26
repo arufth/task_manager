@@ -1,8 +1,10 @@
 export interface Task {
   title: string
+  description: string
   id: string
   completed: boolean
   importance: string
+  isExpanded: boolean
 }
 
 export type Tasks = Task[]
@@ -26,7 +28,21 @@ export interface RemoveTaskAction {
   payload: TasksType
 }
 
-export type TasksActions = AddTaskAction | RemoveTaskAction | ToggleCompleted | ChangeTask
+export interface UpdateDescription {
+  type: 'updateDescription'
+  payload: TasksType
+}
+
+export interface ExpandTask {
+  type: 'expandTask'
+  payload: TasksType
+}
+
+export interface ChangeImportance {
+  type: 'changeImportance'
+  payload: TasksType
+}
+export type TasksActions = AddTaskAction | RemoveTaskAction | ToggleCompleted | ChangeTask | UpdateDescription | ExpandTask | ChangeImportance
 
 export interface TaskContextType {
   filters: {
@@ -38,6 +54,9 @@ export interface TaskContextType {
   toggleCompleted: (id: string) => void
   changeTask: (id: string, event: React.ChangeEvent<HTMLInputElement>) => void
   removeTask: (id: string) => void
+  updateDescription: (id: string, event: React.ChangeEvent<HTMLTextAreaElement>) => void
+  expandTask: (id: string) => void
+  changeImportance: (id: string, event: React.ChangeEvent<HTMLSelectElement>) => void
   handleStatusFilter: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleImportanceFilter: (event: React.MouseEvent<HTMLButtonElement>) => void
 }
