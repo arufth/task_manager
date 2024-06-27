@@ -23,6 +23,7 @@
   font-family:  "VT323", monospace;
   letter-spacing: .1rem;
   padding-left: .1rem;
+  scrollbar-width: none;
 }
 
 body {
@@ -37,6 +38,7 @@ h1 {
   font-size: 4em;
   line-height: 1.1;
   margin-bottom: 0;
+  margin-top: 1.5rem ;
   font-weight: 900;
 }
 

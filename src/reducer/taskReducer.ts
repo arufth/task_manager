@@ -18,6 +18,8 @@ export const tasksReducer = (state: TasksType, action: TasksActions): TasksType 
       return payload
     case 'updateDescription':
       return payload
+    case 'removeAllCompleted':
+      return payload
     default:
       return state
   }

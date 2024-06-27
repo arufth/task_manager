@@ -3,6 +3,8 @@ import { AddTask } from './components/AddTask/AddTask'
 import { FilterTask } from './components/FilterTask/FilterTask'
 import { CounterTasks } from './components/CounterTasks/CounterTasks'
 
+import { RemoveButton } from './components/RemoveButton/RemoveButton'
+
 import './App.css'
 
 const App: React.FC = () => {
@@ -13,6 +15,7 @@ const App: React.FC = () => {
       <Tasks />
       <CounterTasks />
       <FilterTask />
+      <RemoveButton />
     </>
   )
 }

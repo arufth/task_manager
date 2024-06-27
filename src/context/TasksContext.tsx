@@ -87,6 +87,11 @@ export const TasksContextProvider: React.FC<Props> = ({ children }) => {
     dispatch({ type: 'changeImportance', payload: newTasks })
   }
 
+  const removeAllCompleted = (): void => {
+    const newTasks = tasks.filter(task => !task.completed)
+    dispatch({ type: 'removeAllCompleted', payload: newTasks })
+  }
+
   const handleStatusFilter = (event: React.MouseEvent<HTMLButtonElement>): void => {
     const status = event.currentTarget.textContent ?? filters.status
     const newFilter = { ...filters, status }
@@ -107,7 +112,7 @@ export const TasksContextProvider: React.FC<Props> = ({ children }) => {
   }, [tasks])
 
   return (
-    <TasksContext.Provider value={{ filters, filteredTasks, addTask, toggleCompleted, changeTask, removeTask, updateDescription, expandTask, handleStatusFilter, handleImportanceFilter, changeImportance }}>
+    <TasksContext.Provider value={{ filters, filteredTasks, addTask, toggleCompleted, changeTask, removeTask, updateDescription, expandTask, handleStatusFilter, handleImportanceFilter, changeImportance, removeAllCompleted }}>
       {children}
     </TasksContext.Provider>
   )

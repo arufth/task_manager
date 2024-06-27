@@ -42,7 +42,13 @@ export interface ChangeImportance {
   type: 'changeImportance'
   payload: TasksType
 }
-export type TasksActions = AddTaskAction | RemoveTaskAction | ToggleCompleted | ChangeTask | UpdateDescription | ExpandTask | ChangeImportance
+
+export interface RemoveAllCompleted {
+  type: 'removeAllCompleted'
+  payload: TasksType
+}
+
+export type TasksActions = AddTaskAction | RemoveTaskAction | ToggleCompleted | ChangeTask | UpdateDescription | ExpandTask | ChangeImportance | RemoveAllCompleted
 
 export interface TaskContextType {
   filters: {
@@ -57,6 +63,7 @@ export interface TaskContextType {
   updateDescription: (id: string, event: React.ChangeEvent<HTMLTextAreaElement>) => void
   expandTask: (id: string) => void
   changeImportance: (id: string, event: React.ChangeEvent<HTMLSelectElement>) => void
+  removeAllCompleted: () => void
   handleStatusFilter: (event: React.MouseEvent<HTMLButtonElement>) => void
   handleImportanceFilter: (event: React.MouseEvent<HTMLButtonElement>) => void
 }
