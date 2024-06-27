@@ -1,6 +1,9 @@
 import { useContext } from 'react'
-import { TasksContext } from '../../../context/TasksContext'
-import { getClassName } from '../../../utils/getClassName'
+
+import { TasksContext } from '../../../context/'
+
+import { getClassName } from '../../../utils/'
+
 import { IMPORTANCE } from '../../../../constants'
 
 export const ImportanceFilter: React.FC = () => {

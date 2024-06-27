@@ -1,7 +1,8 @@
 import { useContext } from 'react'
-import { TasksContext } from '../../context/TasksContext'
-import { ViewProps } from '../Task/Task'
-import { Inputs } from '../Inputs/Inputs'
+
+import { TasksContext } from '../../context/'
+
+import { ViewProps, Inputs } from '../'
 
 import './ExpandedView.css'
 

@@ -1,9 +1,4 @@
-import { Tasks } from './components/Tasks/Tasks'
-import { AddTask } from './components/AddTask/AddTask'
-import { FilterTask } from './components/FilterTask/FilterTask'
-import { CounterTasks } from './components/CounterTasks/CounterTasks'
-
-import { RemoveButton } from './components/RemoveButton/RemoveButton'
+import { Tasks, AddTask, CounterTasks, FilterTask, RemoveButton } from './components'
 
 import './App.css'
 

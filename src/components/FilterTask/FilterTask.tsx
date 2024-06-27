@@ -1,5 +1,4 @@
-import { StatusFilter } from './StatusFilter/StatusFilter'
-import { ImportanceFilter } from './ImportanceFilter/ImportanceFilter'
+import { StatusFilter, ImportanceFilter } from './'
 
 import './FilterTask.css'
 

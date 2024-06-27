@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 
-import { TasksContext } from '../../context/TasksContext'
+import { TasksContext } from '../../context/'
 
 import './AddTask.css'
 

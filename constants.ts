@@ -18,25 +18,25 @@ export const defaultFilters = {
 }
 
 export const dafultTasks = {
-  title: '',
+  completed: true,
   description: '',
   id: '',
-  completed: true,
   importance: 'High',
-  isExpanded: false
+  isExpanded: false,
+  title: ''
 }
 
 export const defaultContextValue: TaskContextType = {
-  filters: defaultFilters,
   filteredTasks: [dafultTasks],
+  filters: defaultFilters,
   addTask: () => {},
-  toggleCompleted: () => {},
+  changeImportance: () => {},
   changeTask: () => {},
-  removeTask: () => {},
-  handleStatusFilter: () => {},
-  handleImportanceFilter: () => {},
-  updateDescription: () => {},
   expandTask: () => {},
+  handleImportanceFilter: () => {},
+  handleStatusFilter: () => {},
   removeAllCompleted: () => {},
-  changeImportance: () => {}
+  removeTask: () => {},
+  toggleCompleted: () => {},
+  updateDescription: () => {}
 }

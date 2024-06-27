@@ -1,8 +1,8 @@
 import { Task as TaskType } from '../../../types'
 
+import { NormalView, ExpandedView } from '../'
+
 import './Task.css'
-import { NormalView } from '../NormalView/NormalView'
-import { ExpandedView } from '../ExpandedView/ExpandedView'
 
 export interface ViewProps {
   task: TaskType

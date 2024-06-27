@@ -1,9 +1,14 @@
 import { createContext, useEffect, useReducer, useState } from 'react'
+
 import { TaskContextType } from '../../types'
+
 import { defaultContextValue } from '../../constants'
-import { tasksReducer } from '../reducer/taskReducer'
-import { getTasks } from '../services/getTasks'
-import { filterTasks, filterTasksImportance } from '../utils/filterTasks'
+
+import { tasksReducer } from '../reducer/'
+
+import { getTasks } from '../services/'
+
+import { filterTasks, filterTasksImportance } from '../utils/'
 
 export const TasksContext = createContext<TaskContextType>(defaultContextValue)
 
@@ -112,7 +117,21 @@ export const TasksContextProvider: React.FC<Props> = ({ children }) => {
   }, [tasks])
 
   return (
-    <TasksContext.Provider value={{ filters, filteredTasks, addTask, toggleCompleted, changeTask, removeTask, updateDescription, expandTask, handleStatusFilter, handleImportanceFilter, changeImportance, removeAllCompleted }}>
+    <TasksContext.Provider value={{
+      filters,
+      filteredTasks,
+      addTask,
+      changeImportance,
+      changeTask,
+      expandTask,
+      handleImportanceFilter,
+      handleStatusFilter,
+      removeAllCompleted,
+      removeTask,
+      toggleCompleted,
+      updateDescription
+    }}
+    >
       {children}
     </TasksContext.Provider>
   )

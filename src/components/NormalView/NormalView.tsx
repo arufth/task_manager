@@ -1,5 +1,4 @@
-import { Inputs } from '../Inputs/Inputs'
-import { ViewProps } from '../Task/Task'
+import { Inputs, ViewProps } from '../'
 
 export const NormalView: React.FC<ViewProps> = ({ task }) => {
   return (
