@@ -36,5 +36,7 @@ export const defaultContextValue: TaskContextType = {
   handleStatusFilter: () => {},
   handleImportanceFilter: () => {},
   updateDescription: () => {},
-  expandTask: () => {}
+  expandTask: () => {},
+  removeAllCompleted: () => {},
+  changeImportance: () => {}
 }
