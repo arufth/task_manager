@@ -6,7 +6,7 @@ Task Manager is a modern web application designed to help users manage their dai
 
 ## Live Demo
 
-You can access the live demo [here](https://candid-mandazi-85173b.netlify.app/).
+You can access the live demo [here](https://minimalist-task-manager.netlify.app/).
 
 ## Features
 
